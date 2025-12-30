@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Surprise ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  overflow: hidden;
+  background: linear-gradient(120deg,#ff758c,#ff7eb3);
+}
+
+.container {
+  display: flex;
+  width: 800vw;
+  height: 100vh;
+  transition: transform 1s ease;
+}
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+button {
+  margin-top: 25px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 25px;
+  background: #ff3d6d;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* BALLOONS */
+.balloon {
+  position: absolute;
+  bottom: -120px;
+  width: 50px;
+  height: 70px;
+  border-radius: 50%;
+  animation: rise 8s linear infinite;
+}
+.balloon::after {
+  content: '';
+  width: 2px;
+  height: 40px;
+  background: #555;
+  position: absolute;
+  left: 50%;
+  top: 70px;
+}
+
+@keyframes rise {
+  from { transform: translateY(0); }
+  to { transform: translateY(-120vh); }
+}
+
+/* LOVE NOTE */
+.note {
+  position: absolute;
+  background: white;
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 10px;
+  animation: pop 3s ease forwards;
+}
+
+@keyframes pop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* HEART IMAGE */
+.heart {
+  width: 180px;
+  height: 180px;
+  background: red;
+  position: relative;
+  transform: rotate(-45deg);
+  margin-top: 20px;
+}
+.heart::before,
+.heart::after {
+  content: '';
+  width: 180px;
+  height: 180px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+}
+.heart::before { top: -90px; left: 0; }
+.heart::after { left: 90px; top: 0; }
+
+.heart img {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  transform: rotate(45deg);
+  border-radius: 10px;
+}
+
+/* LETTER */
+.letter {
+  background: white;
+  color: #333;
+  padding: 30px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 500px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="slider">
+
+  <!-- PAGE 1 -->
+  <div class="page">
+    <h1>🎉 Happy Birthday pikkku bby  ❤️</h1>
+    <p>Tap to start your surprise</p>
+    <button onclick="next()">Start</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page">
+    <h2>🎈 Balloons for You</h2>
+    <button onclick="balloons()">Release Balloons</button>
+    <button onclick="next()">Next</button>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page">
+    <h2>💌 Love Notes</h2>
+    <button onclick="note()">Tap for Love</button>
+    <button onclick="next()">Next</button>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="page">
+    <h2>❤️ A Heart Just for You</h2>
+    <button onclick="heart()">Open Heart</button>
+    <button onclick="next()">Next</button>
+  </div>
+
+  <!-- PAGE 5 -->
+  <div class="page">
+    <h2>✨ You Are Special</h2>
+    <p>Every smile of yours matters</p>
+    <button onclick="next()">Next</button>
+  </div>
+
+  <!-- PAGE 6 -->
+  <div class="page">
+    <h2>🌸 you are alway remains same in my heart </h2>
+    <p>...................ilu........................</p>
+    <button onclick="next()">Next</button>
+  </div>
+
+  <!-- PAGE 7 -->
+  <div class="page">
+    <h2>🎂 Make a Wish</h2>
+    <p>Close your eyes & smile</p>
+    <button onclick="next()">Final Surprise</button>
+  </div>
+
+  <!-- PAGE 8 -->
+  <div class="page">
+    <h2>💖 A Letter for You</h2>
+    <div class="letter">
+      <p>
+        Dear My Love,<br><br>
+        This little surprise is a reminder
+        that you mean the world to me.
+        May your life be full of smiles,
+        strength, and endless love.<br><br>
+        Happy Birthday BABE ❤️
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let index = 0;
+const slider = document.getElementById("slider");
+
+function next() {
+  index++;
+  slider.style.transform = `translateX(-${index * 100}vw)`;
+}
+
+/* BALLOONS */
+function balloons() {
+  for (let i = 0; i < 15; i++) {
+    let b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.background = `hsl(${Math.random()*360},80%,60%)`;
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),8000);
+  }
+}
+
+/* LOVE NOTES */
+const texts = [
+  "You are my love ❤️",
+  "My favorite person 💕",
+  "Always smiling 😊",
+  "mra bcha",
+  "mri jaan",
+  "ummmaaaha bby",
+  "Forever & always ♾️"
+];
+
+function note() {
+  let n = document.createElement("div");
+  n.className = "note";
+  n.innerText = texts[Math.floor(Math.random()*texts.length)];
+  n.style.left = Math.random()*70 + "vw";
+  n.style.top = Math.random()*70 + "vh";
+  document.body.appendChild(n);
+  setTimeout(()=>n.remove(),3000);
+}
+
+/* HEART IMAGE */
+function heart() {
+  if (document.querySelector(".heart")) return;
+
+  let h = document.createElement("div");
+  h.className = "heart";
+
+  h.innerHTML = `
+    <div class="teddy-wrap">
+      <div class="teddy left">
+        <div class="ear left-ear"></div>
+        <div class="ear right-ear"></div>
+        <div class="face">
+          <div class="eye left-eye"></div>
+          <div class="eye right-eye"></div>
+          <div class="nose"></div>
+        </div>
+      </div>
+
+      <div class="teddy right">
+        <div class="ear left-ear"></div>
+        <div class="ear right-ear"></div>
+        <div class="face">
+          <div class="eye left-eye"></div>
+          <div class="eye right-eye"></div>
+          <div class="nose"></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.querySelectorAll(".page")[3].appendChild(h);
+}
+</script>
+
+</body>
+</html>
